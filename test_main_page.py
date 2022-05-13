@@ -11,4 +11,4 @@ class TestLoginFromMainPage:
                         link)  # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес
         page.open()  # открываем страницу
         page.go_to_login_page()  # авторизируемся
-        page.go_to_choose_project()  # выполняем метод страницы — переходим на страницу логина
+        page.go_to_choose_project()  # создаем пустой баг-репорт
