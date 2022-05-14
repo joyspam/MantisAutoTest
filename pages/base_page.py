@@ -47,38 +47,51 @@ class BasePage:
 
     # авторизация вход
     def go_to_login_page(self):
-        assert self.is_element_present(*BasePageLocators.LOGIN_PAGE), "No bottom to login in"
+        # данные для ввода
+        login = "joyspam"
+        password = "Y@5xbgDz4f7YE2Q"
+
+        assert self.is_element_present(*BasePageLocators.LOGIN_PAGE), "mat-1. No login_page button"
         link = self.browser.find_element(*BasePageLocators.LOGIN_PAGE)
         link.click()
-        self.browser.find_element(*BasePageLocators.LOGIN).send_keys("joyspam")
+        self.browser.find_element(*BasePageLocators.LOGIN).send_keys(login)
+        assert self.is_element_present(*BasePageLocators.ENTER_LOGIN), "mat-2. No login button"
         link = self.browser.find_element(*BasePageLocators.ENTER_LOGIN)
         link.click()
-        self.browser.find_element(*BasePageLocators.PASSWORD).send_keys("Y@5xbgDz4f7YE2Q")
+        self.browser.find_element(*BasePageLocators.PASSWORD).send_keys(password)
+        assert self.is_element_present(*BasePageLocators.ENTER_PASSWORD), "mat-3. No password button"
         link = self.browser.find_element(*BasePageLocators.ENTER_PASSWORD)
         link.click()
-        assert self.is_element_present(*BasePageLocators.REG_OK), "Registration is failed"
+        assert self.is_element_present(*BasePageLocators.REG_OK), "mat-4. Authorisation is failed"
 
     # переход на страницу создания проекта(бага)
     def go_to_choose_project(self):
-        assert self.is_element_present(*BasePageLocators.CHOOSE_PROJECT), "No bottom from my_view_page"
+        assert self.is_element_present(*BasePageLocators.CHOOSE_PROJECT), "mat-5. No project bottom from my_view_page"
         button = self.browser.find_element(*BasePageLocators.CHOOSE_PROJECT)
         button.click()
         assert self.is_element_present(
-            *BasePageLocators.CHOOSE_PROJECT_BUTTON), "No bottom from bugs/login_select_proj_page"
+            *BasePageLocators.CHOOSE_PROJECT_BUTTON), "mat-6. No project bottom from bugs/login_select_proj_page"
         button = self.browser.find_element(*BasePageLocators.CHOOSE_PROJECT_BUTTON)
         button.click()
-        # здесь можно создать отдельную страницу bag_report.py для крупного теста
-        select = Select(self.browser.find_element(*BagReportLocators.SELECT_CATEGORY))
-        select.select_by_visible_text("administration")
-        subject = "Заголовок баг-репорта отвечающий на вопрос 'Что? Где? Когда?'"
-        self.browser.find_element(*BagReportLocators.SUBJECT).send_keys(subject)
-        self.browser.find_element(*BagReportLocators.DESCRIPTION).send_keys("Описание баг-репорта")
 
+        # здесь можно создать отдельную страницу bag_report.py для крупного теста
+
+        # данные для ввода
+        category = "administration"
+        subject = "Заголовок баг-репорта отвечающий на вопрос 'Что? Где? Когда?'"
+        description = "Описание баг-репорта"
+
+        assert self.is_element_present(*BagReportLocators.SELECT_CATEGORY), "mat-7. Can't find select bottom"
+        select = Select(self.browser.find_element(*BagReportLocators.SELECT_CATEGORY))
+        select.select_by_visible_text(category)
+        assert self.is_element_present(*BagReportLocators.SUBJECT), "mat-8. Can't find text area for subject"
+        self.browser.find_element(*BagReportLocators.SUBJECT).send_keys(subject)
+        assert self.is_element_present(*BagReportLocators.DESCRIPTION), "mat-9. Can't find text area for description"
+        self.browser.find_element(*BagReportLocators.DESCRIPTION).send_keys(description)
+
+        assert self.is_element_present(*BagReportLocators.CREATE_PROJECT), "mat-10. No bottom to create a project"
         button = self.browser.find_element(*BagReportLocators.CREATE_PROJECT)
         button.click()
         assert self.is_not_element_present(*BagReportLocators.SPAM_RESULT), \
-            "System considers that it's a spam, wait a few minutes or change " \
-                                                  "login. APPLICATION ERROR #27"
-        assert self.is_element_present(*BagReportLocators.RESULT), "Task is not created"
-        self.is_element_present(*BagReportLocators.RESULT_TASK_NAME), "Task is not created, error of task's name"
-
+            "mat-11. System considers that it's a spam, wait a few minutes or change login."
+        assert self.is_element_present(*BagReportLocators.RESULT), "mat-12. Task is not created"
