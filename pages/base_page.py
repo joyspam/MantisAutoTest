@@ -48,8 +48,8 @@ class BasePage:
     # авторизация вход
     def go_to_login_page(self):
         # данные для ввода
-        login = "joyspam"
-        password = "Y@5xbgDz4f7YE2Q"
+        login = "joyrox"
+        password = "34aJD6w4kz@9JqX"
 
         assert self.is_element_present(*BasePageLocators.LOGIN_PAGE), "mat-1. No login_page button"
         link = self.browser.find_element(*BasePageLocators.LOGIN_PAGE)

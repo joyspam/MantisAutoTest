@@ -15,20 +15,37 @@ def pytest_addoption(parser):
     parser.addoption('--headless', action='store', default=None,
                      help="Open a browser invisible, without GUI is used by default")
 
+    parser.addoption('--mobile', action='store', default=None,
+                     help="Open a browser invisible, without GUI is used by default")
+
+
 
 @pytest.fixture(scope="function")
 def browser(request):
     browser_name = request.config.getoption("browser_name")
     language = request.config.getoption("language")
     headless = request.config.getoption('headless')
+    mobile = request.config.getoption('mobile')
+
+
+
     if browser_name == "chrome":
         print("\nstart chrome browser for test..")
         from selenium.webdriver.chrome.options import Options
         options = Options()
         options.add_experimental_option('prefs', {'intl.accept_languages': language})
+
+        if mobile == 'true':
+            options.add_argument('--window-size=360,640')
+
         if headless == 'true':
             options.add_argument('headless')
+            options.add_argument('--window-size=1420,1080')
         browser = webdriver.Chrome(options=options)
+
+
+
+
     elif browser_name == "firefox":
         print("\nstart firefox browser for test..")
         fp = webdriver.FirefoxProfile()

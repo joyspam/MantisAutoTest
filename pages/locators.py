@@ -7,7 +7,7 @@ class BasePageLocators:
     ENTER_LOGIN = (By.CSS_SELECTOR, ".width-40")
     PASSWORD = (By.NAME, "password")
     ENTER_PASSWORD = (By.CSS_SELECTOR, ".width-40")
-    REG_OK = (By.CSS_SELECTOR, ".btn.btn-primary.btn-sm .fa.fa-edit")
+    REG_OK = (By.CSS_SELECTOR, ".label.hidden-xs.label-default.arrowed")
 
     CHOOSE_PROJECT = (By.CSS_SELECTOR, ".btn.btn-primary.btn-sm .fa.fa-edit")
     CHOOSE_PROJECT_BUTTON = (By.CSS_SELECTOR, ".btn-round")
