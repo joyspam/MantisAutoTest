@@ -13,8 +13,6 @@
 
 Англоязычная версия: pytest --language=en test_main_page.py
 
-Мобильная версия(browser=Chrome, window-size=360,640): pytest --mobile=true test_main_page.py
-
 Запуск "безголового" режима (browser=Chrome, window-size=1420,1080): pytest --headless=true test_main_page.py
 
 
